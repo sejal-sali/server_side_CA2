@@ -1,3 +1,23 @@
+<?php 
+
+session_start();
+
+include "database.php";
+
+$conn = mysqli_connect("localhost","root","","projectdb");
+
+//get laptops$laptops table
+$sql = "SELECT * FROM laptops";
+$result = mysqli_query($conn, $sql);
+$laptops = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+
+
+
+?>
+
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -16,7 +36,7 @@
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
       <div class="container">
-        <a class="navbar-brand" href="index.html">Site Title</a>
+        <a class="navbar-brand" href="page-1.php">Home </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -27,13 +47,13 @@
           <span class="d-flex">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="page-1.html">Page 1</a>
+                <a class="nav-link" aria-current="page" href="login.php">Log In</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="page-2.html">Page 2</a>
+                <a class="nav-link" aria-current="page" href="signup.php">Sign Up</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="page-3.html">Page 3</a>
+                <a class="nav-link" aria-current="page" href="contactform.php">Contact Us</a>
               </li>
             </ul>
           </span>
@@ -43,9 +63,57 @@
 
 <main class="container">
   <div class="starter-template text-center">
-    <h1>Page 1</h1>
-    <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+    <h1>LapTopS</h1>
+    <p class="lead">Technology is best when it brings people together...</p>
   </div>
+
+  <?php
+
+echo '<div class="container">';
+echo '<div class="row">';
+
+foreach ($laptops as $laptop) {
+    echo '<div class="col-md-4 mb-3">';
+    echo '<div class="card h-100">';
+    echo '<img src="' . $laptop['image_url'] . '" class="card-img-top" alt="' . $laptop['model'] . '">';
+    echo '<div class="card-body">';
+    echo '<h5 class="card-title">' . $laptop['model'] . '</h5>';
+    echo '<p class="card-text">' . $laptop['price'] . '</p>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+}
+
+echo '</div>';
+echo '</div>';
+?>
+
+
+<div class="container">
+  <h2>Laptop List:</h2>
+          
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Model</th>
+        <th>Processor</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach($laptops as $laptop): ?>
+      <tr>
+        <td><?php echo $laptop['id']; ?></td>
+        <td><?php echo $laptop['model']; ?></td>
+        <td><?php echo $laptop['processor']; ?></td>
+        <td><?php echo $laptop['description']; ?></td>
+      </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+</div>
+
 
 </main><!-- /.container -->
     <script src="js/bootstrap.bundle.min.js"></script>
