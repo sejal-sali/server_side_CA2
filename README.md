@@ -1,6 +1,5 @@
-# server_side_CA2
-# 
-<h2> This is  Laptop website Using php and Mysql.</h2>
+# This is  Laptop website Using php and Mysql.
+
 <h3 align="center"> This a website Allows user to signup, Login and contact through different pages where Adding, Updating, and Deleting Data works completely fine</h3>
 
 <p align="left">
